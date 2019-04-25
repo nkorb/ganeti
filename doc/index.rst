@@ -150,6 +150,7 @@ Draft designs
    design-storagetypes.rst
    design-systemd.rst
    design-upgrade.rst
+   design-virtio-rng-support.rst
    design-virtual-clusters.rst
    devnotes.rst
    dev-codestyle.rst

@@ -732,6 +732,7 @@ docinput = \
 	doc/design-sync-rate-throttling.rst \
 	doc/design-systemd.rst \
 	doc/design-upgrade.rst \
+	doc/design-virtio-rng-support.rst \
 	doc/design-virtual-clusters.rst \
 	doc/design-x509-ca.rst \
 	doc/dev-codestyle.rst \
