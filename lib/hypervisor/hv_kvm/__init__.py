@@ -544,6 +544,8 @@ class KVMHypervisor(hv_base.BaseHypervisor):
       hv_base.ParamInSet(False, constants.HT_VALID_DISCARD_TYPES),
     constants.HV_KVM_CDROM_DISK_TYPE:
       hv_base.ParamInSet(False, constants.HT_KVM_VALID_DISK_TYPES),
+    constants.HV_KVM_VIRTIO_RNG:
+      hv_base.ParamInSet(False, constants.HT_KVM_VALID_VIRTIO_RNG_TYPES),
     constants.HV_USB_MOUSE:
       hv_base.ParamInSet(False, constants.HT_KVM_VALID_MOUSE_TYPES),
     constants.HV_KEYMAP: hv_base.NO_CHECK,
@@ -1646,6 +1648,20 @@ class KVMHypervisor(hv_base.BaseHypervisor):
         "-chardev", "socket,path=%s,server,nowait,id=qga0" % qga_path,
         "-device", "virtio-serial,id=qga0,%s" % qga_pci_info,
         "-device", "virtserialport,chardev=qga0,name=org.qemu.guest_agent.0",
+        ])
+
+    # Add VirtIO RNG device
+    if hvp[constants.HV_KVM_VIRTIO_RNG]:
+      if hvp[constants.HV_KVM_VIRTIO_RNG] != constants.HT_VIRTIO_RNG_OFF:
+        if hvp[constants.HV_KVM_VIRTIO_RNG] == constants.HT_VIRTIO_RNG_RANDOM:
+          rng_dev = '/dev/random'
+        elif hvp[constants.HV_KVM_VIRTIO_RNG] == \
+            constants.HT_VIRTIO_RNG_URANDOM:
+          rng_dev = '/dev/urandom'
+
+        kvm_cmd.extend([
+            "-object", "rng-random,filename=%s,id=rng0" % rng_dev,
+            "-device", "virtio-rng-pci,rng=rng0",
         ])
 
     if hvp[constants.HV_KVM_EXTRA]:

@@ -3,7 +3,7 @@ Native VirtIO RNG support for QEMU/KVM
 ======================================
 
 :Created: 2019-Apr-25
-:Status: Draft
+:Status: Implemented
 :Ganeti-Version: 3.0.0
 
 Background

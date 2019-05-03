@@ -1680,6 +1680,9 @@ hvKvmCdrom2ImagePath = "cdrom2_image_path"
 hvKvmCdromDiskType :: String
 hvKvmCdromDiskType = "cdrom_disk_type"
 
+hvKvmVirtioRng :: String
+hvKvmVirtioRng = "virtio_rng"
+
 hvKvmExtra :: String
 hvKvmExtra = "kvm_extra"
 
@@ -1910,6 +1913,7 @@ hvsParameterTypes = Map.fromList
   , (hvKeymap,                          VTypeString)
   , (hvKvmCdrom2ImagePath,              VTypeString)
   , (hvKvmCdromDiskType,                VTypeString)
+  , (hvKvmVirtioRng,                    VTypeString)
   , (hvKvmExtra,                        VTypeString)
   , (hvKvmFlag,                         VTypeString)
   , (hvKvmFloppyImagePath,              VTypeString)
@@ -2714,6 +2718,23 @@ htKvmValidNicTypes =
                        htNicParavirtual,
                        htNicPcnet,
                        htNicRtl8139]
+
+-- * VirtIO RNG types
+
+htVirtioRngRandom :: String
+htVirtioRngRandom = "random"
+
+htVirtioRngUrandom :: String
+htVirtioRngUrandom = "urandom"
+
+htVirtioRngOff :: String
+htVirtioRngOff = "off"
+
+htKvmValidVirtioRngTypes :: FrozenSet String
+htKvmValidVirtioRngTypes =
+  ConstantUtils.mkset [htVirtioRngRandom,
+                       htVirtioRngUrandom,
+                       htVirtioRngOff]
 
 -- * Vif types
 
@@ -4116,6 +4137,7 @@ hvcDefaults =
           , (hvNicType,                         PyValueEx htNicParavirtual)
           , (hvDiskType,                        PyValueEx htDiskParavirtual)
           , (hvKvmCdromDiskType,                PyValueEx "")
+          , (hvKvmVirtioRng,                    PyValueEx htVirtioRngRandom)
           , (hvKvmDiskAio,                      PyValueEx htKvmAioThreads)
           , (hvUsbMouse,                        PyValueEx "")
           , (hvKeymap,                          PyValueEx "")

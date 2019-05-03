@@ -789,6 +789,17 @@ cpu\_weight
     Set the cpu time ratio to be allocated to the VM. Valid values are
     between 1 and 65535. Default weight is 256.
 
+virtio\_rng
+    Valid for the KVM hypervisor.
+
+    Setting this option exposes a hardware RNG to the quest using the
+    VirtIO RNG paravirtualized device. Set by default to ``random``, which
+    uses /dev/random as a source of entropy. Valid values are:
+
+    - random (/dev/random)
+    - urandom (/dev/urandom)
+    - off
+
 usb\_mouse
     Valid for the KVM hypervisor.
 
